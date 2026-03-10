@@ -55,42 +55,9 @@ const LandingPage = ({ onNav }) => {
           </div>
         </div>
 
-        {/* Hero image — only show on desktop */}
-        {!isMobile && (
-          <div style={{ position: "relative" }}>
-            <div style={{ width: "100%", height: 380, background: `linear-gradient(135deg, ${theme.primary}15, ${theme.accent}10)`, borderRadius: 24, display: "flex", alignItems: "center", justifyContent: "center", border: `2px dashed ${theme.primary}30` }}>
-              <div style={{ textAlign: "center" }}>
-                <Icon name="car" size={80} color={theme.primary + "60"} />
-                <div style={{ color: theme.primary + "80", marginTop: 12, fontWeight: 600 }}>Hero Illustration</div>
-              </div>
-            </div>
-            <div style={{ position: "absolute", bottom: 20, left: -20, background: "#fff", borderRadius: 14, padding: "14px 18px", boxShadow: "0 8px 30px rgba(0,0,0,0.12)", border: `1px solid ${theme.border}` }}>
-              <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 4 }}>Status Honda Vario Anda</div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <div style={{ width: 8, height: 8, background: STATUS.processing.color, borderRadius: "50%" }} />
-                <span style={{ fontWeight: 700, fontSize: 13 }}>Sedang Diproses</span>
-              </div>
-              <div style={{ height: 4, background: theme.border, borderRadius: 10, marginTop: 8, width: 160 }}>
-                <div style={{ width: "65%", height: "100%", background: STATUS.processing.color, borderRadius: 10 }} />
-              </div>
-            </div>
-          </div>
-        )}
 
-        {/* Mobile status card */}
-        {isMobile && (
-          <div style={{ background: `linear-gradient(135deg, ${theme.primary}10, ${theme.accent}08)`, borderRadius: 16, padding: "16px 18px", border: `1px solid ${theme.primary}20` }}>
-            <div style={{ fontSize: 11, color: theme.textMuted, marginBottom: 6 }}>Status Honda Vario Anda</div>
-            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 10 }}>
-              <div style={{ width: 8, height: 8, background: STATUS.processing.color, borderRadius: "50%" }} />
-              <span style={{ fontWeight: 700, fontSize: 14 }}>Sedang Diproses</span>
-              <span style={{ marginLeft: "auto", background: STATUS.processing.bg, color: STATUS.processing.color, padding: "2px 10px", borderRadius: 20, fontSize: 11, fontWeight: 700 }}>65%</span>
-            </div>
-            <div style={{ height: 6, background: theme.border, borderRadius: 10 }}>
-              <div style={{ width: "65%", height: "100%", background: STATUS.processing.color, borderRadius: 10 }} />
-            </div>
-          </div>
-        )}
+
+
       </div>
 
       {/* SERVICES */}

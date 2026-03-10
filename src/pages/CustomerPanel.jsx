@@ -12,15 +12,8 @@ const CustomerPanel = ({ onLogout }) => {
     { id: "history",   icon: "history",  label: "Riwayat" },
   ];
 
-  const vehicles = [
-    { name: "Honda Vario 150", plate: "D 1234 AB", type: "Motor", color: "#E74C3C", status: "processing" },
-    { name: "Yamaha NMAX",     plate: "D 5678 CD", type: "Motor", color: "#3498DB", status: "waiting" },
-  ];
-
-  const history = [
-    { date: "10 Jun 2025", service: "Servis Ringan + Ganti Oli", vehicle: "Honda Vario 150", total: "Rp 120.000", status: "finished" },
-    { date: "02 Apr 2025", service: "Ganti Kampas Rem",          vehicle: "Yamaha NMAX",     total: "Rp 85.000",  status: "finished" },
-  ];
+  const vehicles = [];
+  const history = [];
 
   const renderPage = () => {
     switch (page) {
@@ -28,31 +21,24 @@ const CustomerPanel = ({ onLogout }) => {
         return (
           <div>
             <div style={{ background: `linear-gradient(135deg, ${theme.primary}, ${theme.primaryDark})`, borderRadius: 20, padding: "24px 28px", marginBottom: 24, color: "#fff" }}>
-              <div style={{ fontSize: 13, opacity: 0.85, marginBottom: 4 }}>Halo, Budi Santoso 👋</div>
+              <div style={{ fontSize: 13, opacity: 0.85, marginBottom: 4 }}>Selamat datang 👋</div>
               <div style={{ fontWeight: 800, fontSize: 20, marginBottom: 16 }}>Kendaraan dalam servis</div>
-              <div style={{ background: "rgba(255,255,255,0.15)", borderRadius: 14, padding: "16px 20px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 10 }}>
-                  <div>
-                    <div style={{ fontWeight: 700 }}>Honda Vario 150</div>
-                    <div style={{ fontSize: 12, opacity: 0.75 }}>D 1234 AB · Ganti Oli & Filter</div>
-                  </div>
-                  <Badge status="processing" />
-                </div>
-                <div style={{ fontSize: 12, opacity: 0.75, marginBottom: 6 }}>Progress: 65%</div>
-                <div style={{ height: 8, background: "rgba(255,255,255,0.25)", borderRadius: 10 }}>
-                  <div style={{ width: "65%", height: "100%", background: "#fff", borderRadius: 10 }} />
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: 11, opacity: 0.7, marginTop: 6 }}>
-                  <span>Check-in</span><span>Diagnosa</span><span>Pengerjaan</span><span>Selesai</span>
-                </div>
+              <div style={{ background: "rgba(255,255,255,0.15)", borderRadius: 14, padding: "16px 20px", textAlign: "center" }}>
+                <div style={{ fontSize: 36, marginBottom: 8 }}>🔧</div>
+                <div style={{ fontWeight: 600, fontSize: 14 }}>Tidak ada kendaraan dalam servis</div>
+                <div style={{ fontSize: 12, opacity: 0.75, marginTop: 4 }}>Buat booking untuk mulai servis</div>
               </div>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 24 }}>
-              <StatCard label="Total Servis" value="8x"  icon="wrench" color={theme.primary} />
-              <StatCard label="Kendaraan"    value="2"   icon="car"    color={theme.info} />
+              <StatCard label="Total Servis" value="0x"  icon="wrench" color={theme.primary} />
+              <StatCard label="Kendaraan"    value="0"   icon="car"    color={theme.info} />
             </div>
             <div style={{ fontWeight: 700, fontSize: 15, marginBottom: 14 }}>Aktivitas Terbaru</div>
-            {history.slice(0, 2).map((h, i) => (
+            {history.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "30px 0", color: theme.textMuted }}>
+                <div style={{ fontSize: 13 }}>Belum ada aktivitas servis</div>
+              </div>
+            ) : history.slice(0, 2).map((h, i) => (
               <Card key={i} style={{ marginBottom: 10, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                 <div>
                   <div style={{ fontWeight: 600, fontSize: 13 }}>{h.service}</div>
@@ -117,10 +103,12 @@ const CustomerPanel = ({ onLogout }) => {
         return (
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-              <div style={{ fontWeight: 700 }}>2 Kendaraan</div>
+              <div style={{ fontWeight: 700 }}>{vehicles.length} Kendaraan</div>
               <Btn size="sm" icon="plus">Tambah</Btn>
             </div>
-            {vehicles.map((v, i) => (
+            {vehicles.length === 0 ? (
+              <EmptyState icon="car" title="Belum ada kendaraan" desc="Tambahkan kendaraan Anda untuk mulai booking servis" action="+ Tambah Kendaraan" />
+            ) : vehicles.map((v, i) => (
               <Card key={i} style={{ marginBottom: 14 }}>
                 <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
                   <div style={{ width: 64, height: 64, background: v.color + "15", borderRadius: 14, display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -135,7 +123,6 @@ const CustomerPanel = ({ onLogout }) => {
                 </div>
               </Card>
             ))}
-            <EmptyState icon="car" title="Tambah Kendaraan" desc="Kendaraan Anda belum semua terdaftar?" action="+ Tambah Kendaraan" />
           </div>
         );
 

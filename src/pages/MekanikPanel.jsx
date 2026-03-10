@@ -10,31 +10,28 @@ const MekanikPanel = ({ onLogout }) => {
   const isMobile = useIsMobile();
 
   const navItems = [
-    { id: "tugas", icon: "list",    label: "Tugas", badge: 3 },
+    { id: "tugas", icon: "list",    label: "Tugas" },
     { id: "parts", icon: "package", label: "Parts" },
   ];
   const navItemsFull = [
-    { id: "tugas", icon: "list",    label: "Tugas Saya", badge: 3 },
+    { id: "tugas", icon: "list",    label: "Tugas Saya" },
     { id: "parts", icon: "package", label: "Input Part" },
   ];
-  const tasks = [
-    { id: 1, name: "Budi Santoso", vehicle: "Honda Vario 150", plate: "D 1234 AB", service: "Ganti Oli + Filter", status: "processing" },
-    { id: 2, name: "Siti Rahayu",  vehicle: "Yamaha Beat",     plate: "B 7890 CD", service: "Servis Ringan",      status: "waiting" },
-    { id: 3, name: "Ahmad Fauzi",  vehicle: "Honda Scoopy",    plate: "D 4321 EF", service: "Turun Mesin",        status: "waiting" },
-  ];
-  const parts = [
-    { name: "Oli Shell Helix HX5",    code: "OLI-001", stock: 24, price: "Rp 65.000" },
-    { name: "Filter Oli Universal",   code: "FLT-002", stock: 15, price: "Rp 18.000" },
-    { name: "Kampas Rem Depan Honda", code: "KMP-003", stock: 8,  price: "Rp 35.000" },
-    { name: "Busi NGK CR7HSA",        code: "BSI-004", stock: 32, price: "Rp 25.000" },
-  ];
+  const tasks = [];
+  const parts = [];
 
   const renderPage = () => {
     switch (page) {
       case "tugas":
         return (
           <div>
-            {tasks.map((t) => (
+            {tasks.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "60px 20px", color: theme.textMuted }}>
+                <Icon name="list" size={48} color={theme.border} />
+                <div style={{ marginTop: 16, fontWeight: 700, fontSize: 15, color: theme.text }}>Belum ada tugas</div>
+                <div style={{ fontSize: 13, marginTop: 6 }}>Tugas servis akan muncul di sini</div>
+              </div>
+            ) : tasks.map((t) => (
               <Card key={t.id} style={{ marginBottom: 16 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 12 }}>
                   <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
@@ -77,7 +74,13 @@ const MekanikPanel = ({ onLogout }) => {
                 <input placeholder="Ketik nama atau kode part..." style={{ border: "none", background: "transparent", outline: "none", flex: 1, fontSize: 13, fontFamily: "'Sora', sans-serif" }} />
               </div>
             </Card>
-            {parts.map((p, i) => (
+            {parts.length === 0 ? (
+              <div style={{ textAlign: "center", padding: "40px 20px", color: theme.textMuted }}>
+                <Icon name="package" size={48} color={theme.border} />
+                <div style={{ marginTop: 16, fontWeight: 700, fontSize: 15, color: theme.text }}>Belum ada data parts</div>
+                <div style={{ fontSize: 13, marginTop: 6 }}>Data sparepart akan muncul di sini</div>
+              </div>
+            ) : parts.map((p, i) => (
               <Card key={i} style={{ marginBottom: 10 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                   <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
